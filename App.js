@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, SafeAreaView, Image, TouchableOpacity } from 'react-native';
+import { Text, View, SafeAreaView, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack';
@@ -101,12 +101,42 @@ function SettingsScreenDetail() {
   );
 }
 
-function NotificationsScreen({ navigation }) {
+function NotificationsScreen() {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.goBack()} title="Go back home" />
-    </View>
+    <SafeAreaView style={{ flex: 1}}>
+      <CustomHeader title="Notifications"/>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Text>Notifications Screen!</Text>     
+      </View>
+    </SafeAreaView>
   );
+}
+
+function CustomDrawerContent(props){
+
+  return(
+    <SafeAreaView style={{flex: 1}} >
+      <View style={{height: 150, alignItems: 'center', justifyContent: 'center'}}>
+        <Image source={require('./src/images/profile.png')} 
+          style={{height: 120, width: 120, borderRadius: 60 }}
+        />
+      </View>
+      <ScrollView style={{marginLeft: 5}}>
+        <TouchableOpacity
+            style={{marginTop: 20}}
+            onPress={() => props.navigation.navigate('MenuTab')}
+          >
+            <Text>Menu Tab</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{marginTop: 20}}
+            onPress={() => props.navigation.navigate('Notifications')}
+          >
+            <Text>Notifications</Text>
+          </TouchableOpacity>          
+      </ScrollView>
+    </SafeAreaView>
+  )
 }
 
 const Tab = createBottomTabNavigator();
@@ -174,7 +204,7 @@ const Drawer = createDrawerNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="MenuTab">
+      <Drawer.Navigator initialRouteName="MenuTab" drawerContent={props => CustomDrawerContent(props)} >
         <Drawer.Screen name="MenuTab" component={TabNavigator} />
         <Drawer.Screen name="Notifications" component={NotificationsScreen} />
       </Drawer.Navigator>
