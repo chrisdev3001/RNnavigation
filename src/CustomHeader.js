@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, SafeAreaView, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { IMAGE } from './global/Image';
 
 export class CustomHeader extends Component{
     render(){
@@ -11,7 +12,7 @@ export class CustomHeader extends Component{
                         <TouchableOpacity onPress={()=> navigation.openDrawer()} >
                             <Image 
                                 style={{width: 30, height: 30, marginLeft: 5}}
-                                source={require('./src/images/menu-abierto.png')}
+                                source={ IMAGE.ICON_MENU }
                                 resizeMode="contain"
                             />
                         </TouchableOpacity>
@@ -22,7 +23,7 @@ export class CustomHeader extends Component{
                         >
                             <Image 
                                 style={{width: 20, height: 20, marginLeft: 5}}
-                                source={require('./src/images/back.png')}
+                                source={ IMAGE.ICON_BACK }
                                 resizeMode="contain"
                             />
                             <Text>Back</Text>

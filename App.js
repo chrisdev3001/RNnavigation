@@ -10,6 +10,7 @@ import { CustomHeader, CustomDrawerContent } from './src';
 import { HomeScreen, HomeScreenDetail, SettingsScreen, SettingsScreenDetail } from './src/tab';
 import { NotificationsScreen } from './src/drawer';
 import { LoginScreen, RegisterScreen } from './src/auth';
+import { IMAGE } from './src/global/Image';
 
 
 const Tab = createBottomTabNavigator();
@@ -49,12 +50,12 @@ function TabNavigator(){
 
             if (route.name === 'Home') {
               iconName = focused
-                ? require('./src/images/home-black.png')
-                : require('./src/images/home.png');
+                ? IMAGE.ICON_HOME_BLACK
+                : IMAGE.ICON_HOME;
             } else if (route.name === 'Settings') {
               iconName = focused 
-                ? require('./src/images/setting-black.png') 
-                : require('./src/images/setting.png');
+                ? IMAGE.ICON_SETTINGS_BLACK
+                : IMAGE.ICON_SETTINGS;
             }
 
             // You can return any component that you like here!
