@@ -112,6 +112,41 @@ function NotificationsScreen() {
   );
 }
 
+function RegisterScreen() {
+  return (
+    <SafeAreaView style={{ flex: 1}}>
+      <CustomHeader title="Register"/>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Text>Register Screen!</Text>     
+      </View>
+    </SafeAreaView>
+  );
+}
+
+function LoginScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <SafeAreaView style={{ flex: 1}}>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Text>Login Screen!</Text>
+        <TouchableOpacity
+          style={{marginTop: 20}}
+          onPress={() => navigation.navigate('HomeApp')}
+        >
+          <Text>Login</Text>
+        </TouchableOpacity>        
+        <TouchableOpacity
+          style={{marginTop: 20}}
+          onPress={() => navigation.navigate('Register')}
+        >
+          <Text>Register</Text>
+        </TouchableOpacity>          
+      </View>
+    </SafeAreaView>
+  );
+}
+
 function CustomDrawerContent(props){
 
   return(
@@ -201,13 +236,25 @@ function TabNavigator(){
 
 const Drawer = createDrawerNavigator();
 
+function DrawerNavigation(){
+  return (
+    <Drawer.Navigator initialRouteName="MenuTab" drawerContent={props => CustomDrawerContent(props)} >
+      <Drawer.Screen name="MenuTab" component={TabNavigator} />
+      <Drawer.Screen name="Notifications" component={NotificationsScreen} />
+    </Drawer.Navigator>
+  )
+}
+
+const StackApp = createStackNavigator();
+
 export default function App() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="MenuTab" drawerContent={props => CustomDrawerContent(props)} >
-        <Drawer.Screen name="MenuTab" component={TabNavigator} />
-        <Drawer.Screen name="Notifications" component={NotificationsScreen} />
-      </Drawer.Navigator>
+      <StackApp.Navigator initialRouteName="Login">
+        <StackApp.Screen name="HomeApp" component={DrawerNavigation} options={navOptionHandler} />
+        <StackApp.Screen name="Login" component={LoginScreen} options={navOptionHandler} />
+        <StackApp.Screen name="Register" component={RegisterScreen} options={navOptionHandler} />
+      </StackApp.Navigator>
     </NavigationContainer>
   );
 }
