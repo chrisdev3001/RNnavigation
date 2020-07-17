@@ -4,6 +4,7 @@ import { IMAGE } from './global/Image';
 
 export class CustomHeader extends Component{
     render(){
+        let { navigation, isHome, title } = this.props;
         return (
             <View style={{flexDirection: 'row', height: 50}}>
                 <View style={{flex:1, justifyContent: 'center'}}>

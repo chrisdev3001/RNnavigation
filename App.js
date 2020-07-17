@@ -3,7 +3,6 @@ import { Text, View, SafeAreaView, Image, TouchableOpacity, ScrollView } from 'r
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack';
-import { useNavigation } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import { CustomHeader, CustomDrawerContent } from './src';
@@ -77,7 +76,7 @@ const Drawer = createDrawerNavigator();
 
 function DrawerNavigation(){
   return (
-    <Drawer.Navigator initialRouteName="MenuTab" drawerContent={props => CustomDrawerContent(props)} >
+    <Drawer.Navigator initialRouteName="MenuTab" drawerContent={ () => <CustomDrawerContent/> } >
       <Drawer.Screen name="MenuTab" component={TabNavigator} />
       <Drawer.Screen name="Notifications" component={NotificationsScreen} />
     </Drawer.Navigator>
