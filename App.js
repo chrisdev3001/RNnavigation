@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 function CustomHeader({title, isHome}){
   const navigation = useNavigation();
@@ -11,11 +12,13 @@ function CustomHeader({title, isHome}){
     <View style={{flexDirection: 'row', height: 50}}>
       <View style={{flex:1, justifyContent: 'center'}}>
           {
-            isHome ? 
-              <Image style={{width: 30, height: 30, marginLeft: 5}}
-                source={require('./src/images/menu-abierto.png')}
-                resizeMode="contain"
-              />
+            isHome ?
+              <TouchableOpacity onPress={()=> navigation.openDrawer()} >
+                <Image style={{width: 30, height: 30, marginLeft: 5}}
+                  source={require('./src/images/menu-abierto.png')}
+                  resizeMode="contain"
+                />
+              </TouchableOpacity>
               :
               <TouchableOpacity 
                 style={{flexDirection: 'row', alignItems: 'center'}}
@@ -98,6 +101,13 @@ function SettingsScreenDetail() {
   );
 }
 
+function NotificationsScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button onPress={() => navigation.goBack()} title="Go back home" />
+    </View>
+  );
+}
 
 const Tab = createBottomTabNavigator();
 
@@ -127,10 +137,9 @@ function SettingStack(){
   )
 }
 
-export default function App() {
+function TabNavigator(){
   return (
-    <NavigationContainer>
-      <Tab.Navigator
+    <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
@@ -156,7 +165,19 @@ export default function App() {
       >
         <Tab.Screen name="Home" component={HomeStack} />
         <Tab.Screen name="Settings" component={SettingStack} />
-      </Tab.Navigator>
+    </Tab.Navigator>
+  )
+}
+
+const Drawer = createDrawerNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator initialRouteName="MenuTab">
+        <Drawer.Screen name="MenuTab" component={TabNavigator} />
+        <Drawer.Screen name="Notifications" component={NotificationsScreen} />
+      </Drawer.Navigator>
     </NavigationContainer>
   );
 }
