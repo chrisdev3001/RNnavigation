@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View, SafeAreaView, TouchableOpacity } from 'react-native';
+import { View, SafeAreaView, TouchableOpacity } from 'react-native';
 import { CustomHeader } from '../index';
+import { RVText } from '../core';
 
 export class HomeScreen extends Component{
     render(){
@@ -8,12 +9,12 @@ export class HomeScreen extends Component{
           <SafeAreaView style={{ flex: 1}}>
             <CustomHeader title="Home" isHome={true} navigation={this.props.navigation} />
             <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                <Text>Home!</Text>
+                <RVText content="Home!" />
                 <TouchableOpacity
                     style={{marginTop: 20}}
                     onPress={() => this.props.navigation.navigate('HomeDetail')}
                 >
-                    <Text>Go home detail</Text>
+                    <RVText content="Go home detail" />
                 </TouchableOpacity>
             </View>
           </SafeAreaView>
