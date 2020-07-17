@@ -74,9 +74,9 @@ function TabNavigator(){
 
 const Drawer = createDrawerNavigator();
 
-function DrawerNavigation(){
+function DrawerNavigation({navigation}){
   return (
-    <Drawer.Navigator initialRouteName="MenuTab" drawerContent={ () => <CustomDrawerContent/> } >
+    <Drawer.Navigator initialRouteName="MenuTab" drawerContent={ () => <CustomDrawerContent navigation={navigation} /> } >
       <Drawer.Screen name="MenuTab" component={TabNavigator} />
       <Drawer.Screen name="Notifications" component={NotificationsScreen} />
     </Drawer.Navigator>

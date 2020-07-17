@@ -11,7 +11,7 @@ export class SettingsScreen extends Component{
                 <Text>Settingss!</Text>
                 <TouchableOpacity
                     style={{marginTop: 20}}
-                    onPress={() => navigation.navigate('SettingDetail')}
+                    onPress={() => this.props.navigation.navigate('SettingDetail')}
                 >
                     <Text>Go settings detail</Text>
                 </TouchableOpacity>        
