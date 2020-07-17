@@ -98,35 +98,62 @@ function SettingsScreenDetail() {
   );
 }
 
-const Stack = createStackNavigator();
+
 const Tab = createBottomTabNavigator();
 
 const navOptionHandler = () => ({
   headerShown: false
 })
 
+const StackHome = createStackNavigator();
+
 function HomeStack(){
   return(
-    <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen name="Home" component={HomeScreen} options={navOptionHandler} />
-      <Stack.Screen name="HomeDetail" component={HomeScreenDetail} options={navOptionHandler}/>
-    </Stack.Navigator>
+    <StackHome.Navigator initialRouteName="Home">
+      <StackHome.Screen name="Home" component={HomeScreen} options={navOptionHandler} />
+      <StackHome.Screen name="HomeDetail" component={HomeScreenDetail} options={navOptionHandler}/>
+    </StackHome.Navigator>
   )
 }
 
+const StackSetting = createStackNavigator();
+
 function SettingStack(){
   return(
-    <Stack.Navigator initialRouteName="Setting">
-      <Stack.Screen name="Setting" component={SettingsScreen} options={navOptionHandler} />
-      <Stack.Screen name="SettingDetail" component={SettingsScreenDetail} options={navOptionHandler} />
-    </Stack.Navigator>
+    <StackSetting.Navigator initialRouteName="Setting">
+      <StackSetting.Screen name="Setting" component={SettingsScreen} options={navOptionHandler} />
+      <StackSetting.Screen name="SettingDetail" component={SettingsScreenDetail} options={navOptionHandler} />
+    </StackSetting.Navigator>
   )
 }
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+
+            if (route.name === 'Home') {
+              iconName = focused
+                ? require('./src/images/home-black.png')
+                : require('./src/images/home.png');
+            } else if (route.name === 'Settings') {
+              iconName = focused 
+                ? require('./src/images/setting-black.png') 
+                : require('./src/images/setting.png');
+            }
+
+            // You can return any component that you like here!
+            return <Image source={iconName} style={{width: 20, height: 20}} resizeMode="contain" />;
+          },
+        })}
+        tabBarOptions={{
+          activeTintColor: 'tomato',
+          inactiveTintColor: 'black',
+        }}
+      >
         <Tab.Screen name="Home" component={HomeStack} />
         <Tab.Screen name="Settings" component={SettingStack} />
       </Tab.Navigator>
